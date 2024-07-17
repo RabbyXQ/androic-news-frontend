@@ -6,17 +6,22 @@ import {
   Collapse,
   SimpleGrid,
   useColorModeValue,
+  Avatar,
+  IconButton,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import { menuItems } from './menuItems';
 import ThemeToggler from './ThemeToggler';
+import { HomeIcon, BellIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline'; // Correct import for HomeIcon
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'; // Social media icons
 
 const MotionChevronDownIcon = motion(ChevronDownIcon);
 const MotionChevronUpIcon = motion(ChevronUpIcon);
 
 const textColorDefault = 'white'; // Default text color for links
 const linkHoverColor = '#00d49f'; // Hover color for links
+const iconColor = '#00d49f'; // Color for icons
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -52,19 +57,53 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
+        {/* Top-left corner icons and avatar */}
+        <Flex
+          direction="row"
+          align="center"
+          position="absolute"
+          top={6} // Adjust as needed
+          left={6} // Adjust as needed
+          zIndex={2} // Ensure it is above the menu items
+        >
+          <IconButton 
+            aria-label="Home"
+            icon={<HomeIcon color={iconColor} />} // Set icon color
+            variant="ghost"
+            size="xs"
+            mr={2} // Margin to the right
+          />
+          <IconButton 
+            aria-label="Notifications"
+            icon={<BellIcon color={iconColor} />} // Set icon color
+            variant="ghost"
+            size="xs"
+            mr={2} // Margin to the right
+          />
+          <IconButton 
+            aria-label="Messages"
+            icon={<ChatBubbleLeftIcon color={iconColor} />} // Set icon color
+            variant="ghost"
+            size="xs"
+            mr={2} // Margin to the right
+          />
+          <Avatar name="User Name" src="path/to/avatar.jpg" size="xs" mr={2} />
+        </Flex>
+
         {/* Top-right corner ThemeToggler */}
         <Flex
           position="absolute"
           top={4} // Adjust as needed
           right={4} // Adjust as needed
-          zIndex={2} // Ensure it is above the menu items
+          zIndex={2} 
+          display={{ base: 'flex', md: 'none', lg: 'none' }} // Ensure it is above the menu items
         >
           <ThemeToggler />
         </Flex>
 
         <Flex
           direction="column"
-          mt={10} // Add margin top to ensure space below ThemeToggler
+          mt={10} // Add margin top to ensure space below icons and ThemeToggler
         >
           {menuItems.map((category) => (
             <Box key={category.name} mb={4}>
@@ -122,6 +161,55 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
               </Collapse>
             </Box>
           ))}
+        </Flex>
+
+        {/* Social Media Icons at the Bottom */}
+        <Flex
+          direction="row"
+          justify="center"
+          align="center"
+          position="absolute"
+          bottom={4} // Adjust as needed
+          left={0}
+          right={0}
+          zIndex={2}
+        >
+          <IconButton
+            aria-label="Facebook"
+            icon={<FaFacebook />}
+            variant="ghost"
+            color="white"
+            size="lg"
+            mx={2}
+            _hover={{ color: linkHoverColor }}
+          />
+          <IconButton
+            aria-label="Twitter"
+            icon={<FaTwitter />}
+            variant="ghost"
+            color="white"
+            size="lg"
+            mx={2}
+            _hover={{ color: linkHoverColor }}
+          />
+          <IconButton
+            aria-label="Instagram"
+            icon={<FaInstagram />}
+            variant="ghost"
+            color="white"
+            size="lg"
+            mx={2}
+            _hover={{ color: linkHoverColor }}
+          />
+          <IconButton
+            aria-label="LinkedIn"
+            icon={<FaLinkedin />}
+            variant="ghost"
+            color="white"
+            size="lg"
+            mx={2}
+            _hover={{ color: linkHoverColor }}
+          />
         </Flex>
       </Flex>
     </Collapse>

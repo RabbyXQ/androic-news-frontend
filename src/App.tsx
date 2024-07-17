@@ -3,11 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 import Head from './Components/Header/Head';
 import { ChakraBaseProvider, ChakraProvider } from '@chakra-ui/react';
+import Footer from './Components/Footer/Footer';
+import Exclusive from './Components/List/Exclusive';
+import News from './Components/List/News';
+import NewsNFeature from './Components/List/NewsNFeature';
 
 function App() {
   return (
     <ChakraProvider>
       <Head/>
+      <Exclusive/>
+      <NewsNFeature/>
+      <Footer/>
     </ChakraProvider>
   );
 }

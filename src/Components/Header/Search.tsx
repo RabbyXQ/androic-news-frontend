@@ -54,7 +54,8 @@ const Search: React.FC = () => {
           <Flex
             align="center"
             width="auto"
-            maxW="300px"
+            maxW="400px" // Increased max-width for better visibility
+            minW="200px" // Set a minimum width to prevent shrinking
             position="relative"
           >
             <Input
@@ -68,6 +69,7 @@ const Search: React.FC = () => {
               value={searchTerm}
               onChange={handleSearchChange}
               mr={2}
+              flex="1" // Allow the input to take up remaining space
             />
             {searchTerm && (
               <IconButton

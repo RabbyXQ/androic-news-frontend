@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -12,44 +12,68 @@ import ThemeToggler from './ThemeToggler';
 import Search from './Search';
 import MobileMenu from './MobileMenu'; // Import the new MobileMenu component
 import Menu from './Menu'; // Import the new Menu component
+import AvatarWithMenu from './AvatarWithMenu'; // Import the new AvatarWithMenu component
+import UserNav from '../Nav/UserNav';
 
 const Head: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { isOpen: isMenuOpen, onToggle: onMenuToggle } = useDisclosure();
-  const headerBgColor = useColorModeValue('white', 'gray.900'); // Adjusted for accurate color usage
+  const headerBgColor = useColorModeValue('white', 'gray.900');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
 
-  // Determine if the view should be mobile or desktop
   const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
 
+  const handleLogin = () => {
+    // Add your login logic here
+    setIsLoggedIn(true);
+  };
+
   return (
+    <>
     <Flex
       as="header"
       p={2}
       bg={headerBgColor}
       align="center"
       justify="space-between"
-      borderBottom="4px"
       borderColor={borderColor}
       position="relative"
       wrap="wrap"
     >
-      {/* Mobile Menu Button */}
       {isMobile && (
         <IconButton
           aria-label="Toggle Menu"
           icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
           onClick={onMenuToggle}
-          variant="ghost" // Use ghost variant to remove border
+          variant="ghost"
           mr={4}
         />
       )}
 
-      {/* Logo or Brand Name */}
-      <Box px={4} fontSize="xl" fontWeight="bold" flexShrink={0}>
-        Android Horizon
-      </Box>
+<Flex
+        align="center"
+        flexGrow={1}
+        justify="flex-start"
+        display={{ base: 'none', md: 'flex' }}
+      >
+        <Box px={4} fontSize="xl" fontWeight="bold" flexShrink={0}>
+          Android Horizon
+        </Box>
+      </Flex>
 
-      {/* Desktop Menu Items */}
+      <Flex
+        align="center"
+        display={{ base: 'flex', md: 'none' }}
+      >
+        <Box
+          display={{ base: 'block', md: 'none' }}
+          fontSize="xl"
+          fontWeight="bold"
+          flexShrink={0}
+        >
+          AH
+        </Box>
+      </Flex>
       <Flex
         display={{ base: 'none', md: 'none', lg: 'flex' }}
         align="center"
@@ -59,19 +83,22 @@ const Head: React.FC = () => {
         <Menu />
       </Flex>
 
-      {/* Search Bar and Search Icon */}
       <Search />
 
-      {/* Mobile Menu Items */}
+      <Flex
+        align="center"
+        display={{ base: 'none', md: 'flex', lg: 'flex' }}
+        ml={4}
+      >
+        <AvatarWithMenu isLoggedIn={isLoggedIn} onLogin={handleLogin} />
+        <ThemeToggler />
+      </Flex>
+
       {isMobile && (
         <MobileMenu isOpen={isMenuOpen} onToggle={onMenuToggle} />
       )}
-
-      {/* Theme Toggler */}
-      <Flex display={{base: 'none', md: 'flex'}} align="center">
-        <ThemeToggler />
-      </Flex>
     </Flex>
+    </>
   );
 };
 

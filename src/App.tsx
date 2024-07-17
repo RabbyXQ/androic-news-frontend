@@ -10,12 +10,14 @@ import NewsNFeature from './Components/List/NewsNFeature';
 import PhonesNGadget from './Components/List/PhonesNGadgets';
 import OSNReviews from './Components/List/OSNReviews';
 import Apps from './Components/List/Apps';
+import UserNav from './Components/Nav/UserNav';
 
 
 function App() {
   return (
     <ChakraProvider>
       <Head/>
+      <UserNav/>
       <Exclusive/>
       <NewsNFeature/>
       <PhonesNGadget/>

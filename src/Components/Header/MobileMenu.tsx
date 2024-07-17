@@ -6,34 +6,31 @@ import {
   Collapse,
   SimpleGrid,
   useColorModeValue,
-  Avatar,
   IconButton,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import { menuItems } from './menuItems';
 import ThemeToggler from './ThemeToggler';
-import { HomeIcon, BellIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline'; // Correct import for HomeIcon
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'; // Social media icons
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const MotionChevronDownIcon = motion(ChevronDownIcon);
 const MotionChevronUpIcon = motion(ChevronUpIcon);
 
-const textColorDefault = 'white'; // Default text color for links
-const linkHoverColor = '#00d49f'; // Hover color for links
-const iconColor = '#00d49f'; // Color for icons
+const textColorDefault = 'white';
+const linkHoverColor = '#00d49f';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onToggle: () => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const headerBgColor = useColorModeValue('gray.800', 'gray.900'); // Darker background color
-  const borderColor = useColorModeValue('gray.700', 'gray.700'); // Slightly darker border color
-  const hoverTextColor = useColorModeValue('#00d49f', '#00d49f'); // Lighter hover text color
+  const headerBgColor = useColorModeValue('gray.800', 'gray.900');
+  const borderColor = useColorModeValue('gray.700', 'gray.700');
+  const hoverTextColor = useColorModeValue(linkHoverColor, linkHoverColor);
 
   const handleCategoryToggle = (category: string) => {
     setActiveCategory(activeCategory === category ? null : category);
@@ -44,67 +41,29 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
       <Flex
         direction="column"
         p={4}
-        bg={headerBgColor} // Darker background color
-        position="fixed" // Fixed to ensure full screen positioning
-        top="4rem" // Adjust to the height of your header
+        bg={headerBgColor}
+        position="fixed"
+        top="4rem"
         left={0}
         right={0}
-        bottom={0} // Full height of the screen
+        bottom={0}
         zIndex={1}
-        borderTop="1px"
-        borderColor={borderColor} // Darker border color
-        as={motion.div} // Apply motion.div for animations
+        borderColor={borderColor}
+        as={motion.div}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        {/* Top-left corner icons and avatar */}
-        <Flex
-          direction="row"
-          align="center"
-          position="absolute"
-          top={6} // Adjust as needed
-          left={6} // Adjust as needed
-          zIndex={2} // Ensure it is above the menu items
-        >
-          <IconButton 
-            aria-label="Home"
-            icon={<HomeIcon color={iconColor} />} // Set icon color
-            variant="ghost"
-            size="xs"
-            mr={2} // Margin to the right
-          />
-          <IconButton 
-            aria-label="Notifications"
-            icon={<BellIcon color={iconColor} />} // Set icon color
-            variant="ghost"
-            size="xs"
-            mr={2} // Margin to the right
-          />
-          <IconButton 
-            aria-label="Messages"
-            icon={<ChatBubbleLeftIcon color={iconColor} />} // Set icon color
-            variant="ghost"
-            size="xs"
-            mr={2} // Margin to the right
-          />
-          <Avatar name="User Name" src="path/to/avatar.jpg" size="xs" mr={2} />
-        </Flex>
-
-        {/* Top-right corner ThemeToggler */}
         <Flex
           position="absolute"
-          top={4} // Adjust as needed
-          right={4} // Adjust as needed
-          zIndex={2} 
-          display={{ base: 'flex', md: 'none', lg: 'none' }} // Ensure it is above the menu items
+          top={4}
+          right={4}
+          zIndex={2}
+          display={{ base: 'flex', md: 'none' }}
         >
           <ThemeToggler />
         </Flex>
 
-        <Flex
-          direction="column"
-          mt={10} // Add margin top to ensure space below icons and ThemeToggler
-        >
+        <Flex direction="column" mt={10}>
           {menuItems.map((category) => (
             <Box key={category.name} mb={4}>
               <Button
@@ -131,7 +90,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
                 }
                 color={textColorDefault}
                 onClick={() => handleCategoryToggle(category.name)}
-                as={motion.button} // Apply motion.button for animations
+                as={motion.button}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -142,7 +101,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
                   {category.subItems.map((item) => (
                     <Box
                       key={item.name}
-                      as={motion.a} // Apply motion.a for animations
+                      as={motion.a}
                       href={item.link}
                       p={3}
                       borderRadius="md"
@@ -163,13 +122,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onToggle }) => {
           ))}
         </Flex>
 
-        {/* Social Media Icons at the Bottom */}
         <Flex
           direction="row"
           justify="center"
           align="center"
           position="absolute"
-          bottom={4} // Adjust as needed
+          bottom={4}
           left={0}
           right={0}
           zIndex={2}

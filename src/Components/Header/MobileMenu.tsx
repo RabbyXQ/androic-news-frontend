@@ -14,6 +14,7 @@ import { menuItems } from './menuItems';
 import ThemeToggler from './ThemeToggler';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
+const MotionFlex = motion(Flex);
 const MotionChevronDownIcon = motion(ChevronDownIcon);
 const MotionChevronUpIcon = motion(ChevronUpIcon);
 
@@ -36,9 +37,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
     setActiveCategory(activeCategory === category ? null : category);
   };
 
+  const handleRegister = () => {
+    // Add your registration logic here
+    alert("Registration functionality is not yet implemented.");
+  };
+
   return (
     <Collapse in={isOpen}>
-      <Flex
+      <MotionFlex
         direction="column"
         p={4}
         bg={headerBgColor}
@@ -49,9 +55,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
         bottom={0}
         zIndex={1}
         borderColor={borderColor}
-        as={motion.div}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
       >
         <Flex
           position="absolute"
@@ -79,12 +82,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
                       color={hoverTextColor}
                       initial={{ rotate: 0 }}
                       animate={{ rotate: 180 }}
+                      transition={{ duration: 0.3 }}
                     />
                   ) : (
                     <MotionChevronDownIcon
                       color={hoverTextColor}
                       initial={{ rotate: 0 }}
                       animate={{ rotate: -180 }}
+                      transition={{ duration: 0.3 }}
                     />
                   )
                 }
@@ -110,8 +115,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
                       fontWeight="medium"
                       color={textColorDefault}
                       textAlign="left"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                     
                     >
                       {item.name}
                     </Box>
@@ -169,7 +173,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
             _hover={{ color: linkHoverColor }}
           />
         </Flex>
-      </Flex>
+
+        <Flex
+          direction="row"
+          justify="center"
+          align="center"
+          mt={4}
+        >
+          
+        </Flex>
+      </MotionFlex>
     </Collapse>
   );
 };

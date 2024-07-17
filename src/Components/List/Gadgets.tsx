@@ -56,17 +56,25 @@ const articles: Article[] = [
     author: "Matt Horne",
     imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/06/Amazon-Prime-Day-2024-graphic-e1719294616746.jpg",
     href: "https://www.androidauthority.com/prime-day-deals-2024-3460969/"
+  },
+
+  {
+    title: "Prime Day deals are live: Here are the best we’ve found so far",
+    description: "",
+    author: "Matt Horne",
+    imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/06/Amazon-Prime-Day-2024-graphic-e1719294616746.jpg",
+    href: "https://www.androidauthority.com/prime-day-deals-2024-3460969/"
   }
 ];
 
-const News: React.FC = () => {
+const Gadgets: React.FC = () => {
   const breakpoint = useBreakpointValue({ base: 'mobile', md: 'tablet', lg: 'pc' });
 
   const hoverColor = '#00d49f'; // Color to use on hover
 
   return (
     <Box p={4}>
-      <Heading mb={2} fontSize="lg" textAlign="start">News</Heading>
+      <Heading mb={2} fontSize="lg" textAlign="start">Gadgets</Heading>
       <Box
         display="flex"
         flexDirection="column"
@@ -150,4 +158,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default Gadgets;

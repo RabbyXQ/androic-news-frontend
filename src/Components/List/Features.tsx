@@ -5,6 +5,7 @@ import { Box, Image, Link, Text, Flex, Heading, Button, useBreakpointValue } fro
 interface Feature {
   title: string;
   description: string;
+  author: string;
   imageUrl: string;
   href: string;
 }
@@ -20,36 +21,35 @@ const getRandomColor = () => {
 };
 
 const features: Feature[] = [
-  {
-    title: "Feature 1: Innovative Design",
-    description: "Our new feature brings cutting-edge design and functionality.",
-    imageUrl: "https://via.placeholder.com/150",
-    href: "https://example.com/feature1"
-  },
-  {
-    title: "Feature 2: Enhanced Performance",
-    description: "Experience unprecedented performance with our latest updates.",
-    imageUrl: "https://via.placeholder.com/150",
-    href: "https://example.com/feature2"
-  },
-  {
-    title: "Feature 3: User-Friendly Interface",
-    description: "A more intuitive and user-friendly interface for seamless navigation.",
-    imageUrl: "https://via.placeholder.com/150",
-    href: "https://example.com/feature3"
-  },
-  {
-    title: "Feature 4: Advanced Security",
-    description: "Your data is safer than ever with our advanced security features.",
-    imageUrl: "https://via.placeholder.com/150",
-    href: "https://example.com/feature4"
-  },
-  {
-    title: "Feature 5: Customizable Options",
-    description: "Tailor the experience to your needs with our new customizable options.",
-    imageUrl: "https://via.placeholder.com/150",
-    href: "https://example.com/feature5"
-  }
+    {
+      title: "Exclusive: Google Pixel 9 series set for sweeping camera improvements",
+      description: "Google is making some major and controversial changes to the cameras in the Pixel 9 series.",
+      author: "Kamila Wojciechowska",
+      imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/05/Google-Pixel-9-Pro-angled-front-view-gray.jpg",
+      href: "https://www.androidauthority.com/exclusive-google-pixel-9-cameras-3460690/"
+    },
+    
+    {
+      title: "I’ve already ditched the new Google Home widget and watch tile",
+      description: "",
+      author: "Rita El Khoury",
+      imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/07/google-home-homescreen-widget-favorites-scaled.jpg",
+      href: "https://www.androidauthority.com/google-home-screen-widget-watch-tile-3457236/"
+    },
+    {
+      title: "Giant Pixel 9 leak gives us our first real-world look at the Fold",
+      description: "",
+      author: "Kamila Wojciechowska",
+      imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/07/goes-hard.jpg",
+      href: "https://www.androidauthority.com/google-pixel-9-pro-fold-ncc-3461263/"
+    },
+    {
+      title: "The OnePlus Watch 2R just made Wear OS with fantastic battery life more accessible",
+      description: "",
+      author: "Kaitlyn Cimino",
+      imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/07/OnePlus-Watch-2R-Classic-Watch-face-scaled.jpg",
+      href: "https://www.androidauthority.com/oneplus-watch-2r-review-3460527/"
+    },
 ];
 
 const Features: React.FC = () => {
@@ -72,29 +72,29 @@ const Features: React.FC = () => {
             href={feature.href}
             isExternal
             display="flex"
-            flexDirection={breakpoint === 'mobile' ? 'row-reverse' : 'row-reverse'}
+            flexDirection={index === 0 && breakpoint !== 'mobile' ? 'row' : 'row-reverse'}
             alignItems="stretch"
             borderRadius="md"
             overflow="hidden"
             boxShadow="sm"
             _hover={{ boxShadow: 'md', color: hoverColor }}
-            mb={2}
             width="100%"
             position="relative"
-            css={breakpoint === 'mobile' ? {
+            css={index === 0 && breakpoint !== 'mobile' ? {} : (breakpoint === 'mobile' ? {
               '&:after': {
                 content: '""',
                 position: 'absolute',
                 left: 0,
                 top: 0,
                 bottom: 0,
-                width: '5px', // Thickness of the color bar
+                width: '6px', // Thickness of the color bar
                 backgroundColor: getRandomColor(), // Random color for the left bar
               }
-            } : {}}
+            } : {})}
+            
           >
             <Flex
-              direction={breakpoint === 'mobile' ? 'row-reverse' : 'row-reverse'}
+              direction={index === 0 && breakpoint !== 'mobile' ? 'row' : 'row-reverse'}
               align="center"
               width="100%"
               flex="1"
@@ -103,8 +103,12 @@ const Features: React.FC = () => {
                 src={feature.imageUrl}
                 alt={feature.title}
                 objectFit="cover"
-                width={breakpoint === 'mobile' ? '100px' : '150px'} // Image size for mobile and larger screens
-                height={breakpoint === 'mobile' ? '100px' : '150px'}
+                width={
+                  index === 0 && breakpoint !== 'mobile' ? '300px' : (breakpoint === 'mobile' ? '100px' : '150px')
+                } // Larger image for the first item on larger screens
+                height={
+                  index === 0 && breakpoint !== 'mobile' ? '300px' : (breakpoint === 'mobile' ? '100px' : '150px')
+                } // Larger image for the first item on larger screens
               />
               <Box p={2} flex="1">
                 <Text

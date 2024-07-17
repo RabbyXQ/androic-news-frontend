@@ -45,8 +45,8 @@ const Head: React.FC = () => {
       )}
 
       {/* Logo or Brand Name */}
-      <Box fontSize="xl" fontWeight="bold" flexShrink={0}>
-        AndroidHorizon
+      <Box px={4} fontSize="xl" fontWeight="bold" flexShrink={0}>
+        Android Horizon
       </Box>
 
       {/* Desktop Menu Items */}

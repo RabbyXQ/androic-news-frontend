@@ -59,14 +59,14 @@ const articles: Article[] = [
   }
 ];
 
-const News: React.FC = () => {
+const Reviews: React.FC = () => {
   const breakpoint = useBreakpointValue({ base: 'mobile', md: 'tablet', lg: 'pc' });
 
   const hoverColor = '#00d49f'; // Color to use on hover
 
   return (
     <Box p={4}>
-      <Heading mb={2} fontSize="lg" textAlign="start">News</Heading>
+      <Heading mb={2} fontSize="lg" textAlign="start">Reviews</Heading>
       <Box
         display="flex"
         flexDirection="column"
@@ -150,4 +150,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default Reviews;

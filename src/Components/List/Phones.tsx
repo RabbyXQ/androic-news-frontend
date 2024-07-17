@@ -28,7 +28,6 @@ const articles: Article[] = [
     imageUrl: "https://www.androidauthority.com/wp-content/uploads/2024/05/Google-Pixel-9-Pro-angled-front-view-gray.jpg",
     href: "https://www.androidauthority.com/exclusive-google-pixel-9-cameras-3460690/"
   },
-  
   {
     title: "I’ve already ditched the new Google Home widget and watch tile",
     description: "",
@@ -59,14 +58,14 @@ const articles: Article[] = [
   }
 ];
 
-const News: React.FC = () => {
+const Phones: React.FC = () => {
   const breakpoint = useBreakpointValue({ base: 'mobile', md: 'tablet', lg: 'pc' });
 
   const hoverColor = '#00d49f'; // Color to use on hover
 
   return (
     <Box p={4}>
-      <Heading mb={2} fontSize="lg" textAlign="start">News</Heading>
+      <Heading mb={2} fontSize="lg" textAlign="start">Phones</Heading>
       <Box
         display="flex"
         flexDirection="column"
@@ -78,9 +77,8 @@ const News: React.FC = () => {
             key={index}
             href={article.href}
             isExternal
-           
             display="flex"
-            flexDirection={breakpoint === 'mobile' ? 'row' : 'row'}
+            flexDirection={index === 0 && breakpoint !== 'mobile' ? 'row' : 'row-reverse'}
             alignItems="stretch"
             borderRadius="md"
             overflow="hidden"
@@ -88,7 +86,7 @@ const News: React.FC = () => {
             _hover={{ boxShadow: 'md', color: hoverColor }}
             width="100%"
             position="relative"
-            css={breakpoint === 'mobile' ? {
+            css={index === 0 && breakpoint !== 'mobile' ? {} : (breakpoint === 'mobile' ? {
               '&:after': {
                 content: '""',
                 position: 'absolute',
@@ -98,21 +96,24 @@ const News: React.FC = () => {
                 width: '5px', // Thickness of the color bar
                 backgroundColor: getRandomColor(), // Random color for the left bar
               }
-            } : {}}
+            } : {})}
           >
             <Flex
-              direction={breakpoint === 'mobile' ? 'row' : 'row'}
+              direction={index === 0 && breakpoint !== 'mobile' ? 'row' : 'row-reverse'}
               align="center"
               width="100%"
               flex="1"
-              flexDirection="row-reverse" // Move image to the right side
             >
               <Image
                 src={article.imageUrl}
                 alt={article.title}
                 objectFit="cover"
-                width={breakpoint === 'mobile' ? '100px' : '150px'} // Image size for mobile and larger screens
-                height={breakpoint === 'mobile' ? '100px' : '150px'}
+                width={
+                  index === 0 && breakpoint !== 'mobile' ? '300px' : (breakpoint === 'mobile' ? '100px' : '150px')
+                } // Larger image for the first item on larger screens
+                height={
+                  index === 0 && breakpoint !== 'mobile' ? '300px' : (breakpoint === 'mobile' ? '100px' : '150px')
+                } // Larger image for the first item on larger screens
               />
               <Box p={2} flex="1">
                 <Text
@@ -150,4 +151,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default Phones;

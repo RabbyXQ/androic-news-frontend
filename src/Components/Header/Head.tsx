@@ -10,16 +10,30 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import ThemeToggler from './ThemeToggler';
 import Search from './Search';
-import MobileMenu from './MobileMenu'; // Import the new MobileMenu component
-import Menu from './Menu'; // Import the new Menu component
-import AvatarWithMenu from './AvatarWithMenu'; // Import the new AvatarWithMenu component
+import MobileMenu from './MobileMenu';
+import Menu from './Menu';
+import AvatarWithMenu from './AvatarWithMenu';
 import UserNav from '../Nav/UserNav';
+
+// Define color palette
+const colors = {
+  lightMode: {
+    headerBg: '#ffffff',
+    borderColor: '#e2e8f0',
+    hoverColor: '#138021',
+  },
+  darkMode: {
+    headerBg: '#1a202c',
+    borderColor: '#2d3748',
+    hoverColor: '#3dd382',
+  },
+};
 
 const Head: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { isOpen: isMenuOpen, onToggle: onMenuToggle } = useDisclosure();
-  const headerBgColor = useColorModeValue('white', 'gray.900');
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const headerBgColor = useColorModeValue(colors.lightMode.headerBg, colors.darkMode.headerBg);
+  const borderColor = useColorModeValue(colors.lightMode.borderColor, colors.darkMode.borderColor);
 
   const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
 
@@ -29,7 +43,6 @@ const Head: React.FC = () => {
   };
 
   return (
-    <>
     <Flex
       as="header"
       p={2}
@@ -37,7 +50,9 @@ const Head: React.FC = () => {
       align="center"
       justify="space-between"
       borderColor={borderColor}
-      position="relative"
+      position="sticky"
+      top={0}
+      zIndex={10}
       wrap="wrap"
     >
       {isMobile && (
@@ -50,7 +65,7 @@ const Head: React.FC = () => {
         />
       )}
 
-<Flex
+      <Flex
         align="center"
         flexGrow={1}
         justify="flex-start"
@@ -74,6 +89,7 @@ const Head: React.FC = () => {
           AH
         </Box>
       </Flex>
+
       <Flex
         display={{ base: 'none', md: 'none', lg: 'flex' }}
         align="center"
@@ -98,7 +114,6 @@ const Head: React.FC = () => {
         <MobileMenu isOpen={isMenuOpen} onToggle={onMenuToggle} />
       )}
     </Flex>
-    </>
   );
 };
 
